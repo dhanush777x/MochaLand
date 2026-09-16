@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# RofiLauncher - Rofi application launcher with style selection (ported from bspwm)
+
+cfgStyle="$HOME/.config/hypr/rofi/.launcher"
+[ -f "$cfgStyle" ] || echo "1" > "$cfgStyle"
+read -r current_style < "$cfgStyle"
+
+styleDir="$HOME/.config/hypr/rofi"
+rofiAssetDir="$HOME/.config/hypr/assets"
+
+choose_launcher_style() {
+
+    styles=$(find "$styleDir" -type f -name 'style-*.rasi' | sed 's|.*/style-\([0-9]*\)\.rasi|\1|' | sort -n)
+
+    selected_index=-1
+    index=0
+    IFS='
+'
+    for style in $styles; do
+        if [ "$style" = "$current_style" ]; then
+            selected_index=$index
+            break
+        fi
+        index=$((index + 1))
+    done
+    unset IFS
+
+    selected=$(
+    IFS='
+'
+    for style in $styles; do
+        printf "%s\000icon\037%s/style-%s.webp\n" "$style" "$rofiAssetDir" "$style"
+    done | rofi -dmenu \
+                -theme "$styleDir/style-select.rasi" \
+                -selected-row "$selected_index"
+    )
+
+    [ -n "$selected" ] && echo "${selected}" > "$cfgStyle"
+}
+
+launch_launcher () {
+    ROFI_THEME="$styleDir/style-$current_style.rasi"
+    rofi -show drun -theme "$ROFI_THEME"
+}
+
+case "$1" in
+    --choose-style)
+        choose_launcher_style ;;
+    --launcher | *)
+        launch_launcher ;;
+esac

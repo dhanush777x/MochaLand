@@ -1,0 +1,29 @@
+[pyprland]
+plugins = ["scratchpads"]
+
+[scratchpads.psysonic]
+#animation = "fromTop"
+command = "psysonic"
+class = "Psysonic-bin"
+size = "75% 85%"
+margin = 60
+lazy = true
+unfocus = "hide"
+
+[scratchpads.spotify]
+#animation = "fromTop"
+command = "spotify"
+class = "Spotify"
+size = "75% 85%"
+margin = 60
+lazy = true
+unfocus = "hide"
+
+[scratchpads.sp]
+#animation = "fromTop"
+command = "superproductivity"
+class = "superproductivity-bin"
+size = "65% 55%"
+margin = 60
+lazy = true
+unfocus = "hide"

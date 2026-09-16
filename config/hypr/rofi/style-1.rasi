@@ -1,0 +1,249 @@
+// dhanush777x - MochaLand
+configuration {
+    modi: "drun";
+    sort: true;
+    disable-history: true;
+    show-icons: true;
+
+    display-drun: "󰀻 Apps";
+    drun-display-format: "{name}";
+}
+
+@import "shared/colors.rasi"
+@import "shared/fonts.rasi"
+
+* {
+    border-colour:               var(selected);
+    handle-colour:               var(selected);
+
+    background-colour:           var(background);
+    foreground-colour:           var(foreground);
+
+    alternate-background:        var(background-alt);
+
+    normal-background:           transparent;
+    normal-foreground:           var(foreground);
+
+    urgent-background:           var(urgent);
+    urgent-foreground:           var(background);
+
+    active-background:           var(active);
+    active-foreground:           var(background);
+
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(background);
+
+    selected-urgent-background:  var(active);
+    selected-urgent-foreground:  var(background);
+
+    selected-active-background:  var(urgent);
+    selected-active-foreground:  var(background);
+}
+
+window {
+    transparency: "real";
+
+    location: center;
+    anchor: center;
+    fullscreen: false;
+
+    width: 600px;
+
+    enabled: true;
+
+    margin: 0px;
+    padding: 0px;
+
+    border: 1px solid;
+    border-radius: 12px;
+    border-color: @border-colour;
+
+    cursor: "default";
+
+    background-color: @background-colour;
+}
+
+mainbox {
+    enabled: true;
+
+    spacing: 10px;
+
+    margin: 0px;
+    padding: 24px;
+
+    border: 0px;
+    border-radius: 12px;
+
+    background-color: transparent;
+
+    children: [ "inputbar", "listview" ];
+}
+
+inputbar {
+    enabled: true;
+
+    spacing: 10px;
+
+    margin: 0px;
+    padding: 0px;
+
+    border: 0px;
+
+    background-color: transparent;
+    text-color: @foreground-colour;
+
+    children: [ "textbox-prompt-colon", "prompt", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled: true;
+
+    padding: 8px 11px;
+
+    expand: false;
+
+    str: "󰍉";
+
+    border-radius: 8px;
+
+    background-color: @active;
+    text-color: @background-colour;
+}
+
+prompt {
+    enabled: true;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    background-color: @selected-normal-background;
+    text-color: @background-colour;
+}
+
+entry {
+    enabled: true;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    background-color: @alternate-background;
+    text-color: @foreground-colour;
+
+    placeholder: "Search...";
+    placeholder-color: @foreground-colour;
+
+    cursor: text;
+}
+
+listview {
+    enabled: true;
+
+    columns: 1;
+    lines: 6;
+
+    cycle: true;
+    dynamic: true;
+
+    scrollbar: false;
+
+    layout: vertical;
+
+    spacing: 6px;
+
+    margin: 0px;
+    padding: 0px;
+
+    border: 0px;
+
+    background-color: transparent;
+    text-color: @foreground-colour;
+
+    fixed-height: true;
+
+    cursor: "default";
+}
+
+element {
+    enabled: true;
+
+    spacing: 10px;
+
+    margin: 0px;
+    padding: 10px 12px;
+
+    border: 0px;
+    border-radius: 10px;
+
+    background-color: transparent;
+    text-color: @foreground-colour;
+
+    cursor: pointer;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @foreground-colour;
+}
+
+element selected.normal {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
+element normal.active {
+    background-color: @active-background;
+    text-color: @active-foreground;
+}
+
+element selected.active {
+    background-color: @active-background;
+    text-color: @active-foreground;
+}
+
+element normal.urgent {
+    background-color: @urgent-background;
+    text-color: @urgent-foreground;
+}
+
+element selected.urgent {
+    background-color: @urgent-background;
+    text-color: @urgent-foreground;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @foreground-colour;
+}
+
+element-icon {
+    background-color: transparent;
+    text-color: inherit;
+
+    size: 22px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+
+    vertical-align: 0.5;
+}
+
+message {
+    enabled: true;
+
+    margin: 0px;
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    background-color: @alternate-background;
+    text-color: @foreground-colour;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: inherit;
+}

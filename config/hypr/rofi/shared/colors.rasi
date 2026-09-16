@@ -1,0 +1,14 @@
+/**
+ *
+ * dhanush777x - MochaLand
+ * https://github.com/dhanush777x/MochaLand
+ *
+ * Color Schemes
+ *
+ * Available: adapta, catppuccin, everforest, gruvbox, nord, solarized
+ *
+ **/
+
+/* Import color-scheme from `colors` directory */
+
+@import "~/.config/hypr/rofi/shared/catppuccin.rasi"

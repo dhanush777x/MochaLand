@@ -1,0 +1,174 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "SF Pro Text", "JetBrainsMono Nerd Font", "Font Awesome 6 Free Solid", "Material Design Icons Desktop", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* ========================================
+   Shared Pill Styling
+======================================== */
+
+#clock,
+#workspaces,
+#pulseaudio,
+#network,
+#battery,
+#tray,
+#temperature,
+#cpu,
+#memory,
+#disk,
+#custom-brightness,
+#custom-launcher {
+    background: rgba(30, 30, 46, 0.92);
+    border: 1px solid rgba(203, 166, 247, 0.14);
+    color: #cdd6f4;
+    border-radius: 999px;
+    min-height: 30px;
+}
+
+/* ========================================
+   Left Modules
+======================================== */
+
+#custom-launcher {
+    color: #89b4fa;
+    font-size: 15px;
+    padding: 0 14px 0 12px;
+    margin-right: 8px;
+}
+
+#temperature {
+    color: #f38ba8;
+    padding: 0 14px;
+}
+
+#cpu {
+    color: #F38BA8;
+    padding: 0 14px;
+}
+
+#memory {
+    color: #94E2D5;
+    padding: 0 14px;
+}
+
+#disk {
+    color: #FAB387;
+    padding: 0 14px;
+}
+
+#custom-brightness {
+    color: #F9E2AF;
+    padding: 0 14px;
+}
+
+/* ========================================
+   Center Modules
+======================================== */
+
+#clock {
+    padding: 0 18px;
+    margin-right: 10px;
+    color: #CDD6F4;
+    font-weight: 600;
+}
+
+#workspaces {
+    padding: 0 10px;
+}
+
+#workspaces button {
+    padding: 0 1px;
+    margin: 0 1px;
+    color: #45475a;
+    background: transparent;
+    transition: all 0.2s ease;
+    font-size: 10px;
+}
+
+#workspaces button.empty {
+    color: #313244;
+}
+
+#workspaces button:not(.active):not(.empty) {
+    color: #b4befe;
+}
+
+#workspaces button.active {
+    color: #f9e2af;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: none;
+    background: transparent;
+    border: none;
+}
+
+/* ========================================
+   Right Modules
+======================================== */
+
+#pulseaudio,
+#network,
+#battery,
+#tray {
+    margin-left: 8px;
+    padding: 0 14px;
+}
+
+#pulseaudio {
+    color: #B4BEFE;
+}
+
+#network {
+    color: #89B4FA;
+}
+
+#battery {
+    color: #A6E3A1;
+}
+
+#tray {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+/* ========================================
+   Hover
+======================================== */
+
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#temperature:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#custom-brightness:hover,
+#custom-launcher:hover,
+#clock:hover {
+    background: rgba(49, 50, 68, 0.95);
+}
+
+/* ========================================
+   Tooltip
+======================================== */
+
+tooltip {
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 12px;
+}
+
+tooltip label {
+    color: #cdd6f4;
+}

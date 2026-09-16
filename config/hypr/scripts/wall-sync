@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# WallSync - Wallpaper cache sync for hyprpaper (ported from bspwm)
+
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}"
+HASH_FILE="$CACHE_DIR/current_wall.hash"
+
+MAGICK_PARAMS="-strip -resize 30% -gravity center -crop 760x196+0+0 +repage -quality 65 -define webp:method=3 -define webp:thread-level=1"
+
+mkdir -p "$CACHE_DIR"
+
+generate_header() {
+    INPUT="$1"
+    magick "$INPUT" $MAGICK_PARAMS "$CACHE_DIR/rofi_header.webp"
+}
+
+check_and_update() {
+    INPUT="$1"
+    NEW_HASH=$(md5sum "$INPUT" | cut -d' ' -f1)
+    OLD_HASH=$(cat "$HASH_FILE" 2>/dev/null)
+
+    if [ "$NEW_HASH" != "$OLD_HASH" ]; then
+        echo "$NEW_HASH" > "$HASH_FILE"
+        generate_header "$INPUT"
+        return 0
+    fi
+    return 1
+}
+
+WALL=$(hyprctl hyprpaper listloaded 2>/dev/null)
+[ -z "$WALL" ] && exit 1
+
+ln -sf "$WALL" "$CACHE_DIR/current_wall"
+check_and_update "$WALL"
+
+exit 0

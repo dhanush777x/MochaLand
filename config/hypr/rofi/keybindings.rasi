@@ -1,0 +1,263 @@
+// dhanush777x - MochaLand
+configuration {
+    show-icons: false;
+}
+
+@import "shared/colors.rasi"
+@import "shared/fonts.rasi"
+
+* {
+    border-colour:               var(selected);
+    handle-colour:               var(selected);
+
+    background-colour:           var(background);
+    foreground-colour:           var(foreground);
+
+    alternate-background:        var(background-alt);
+
+    normal-background:           transparent;
+    normal-foreground:           var(foreground);
+
+    urgent-background:           var(urgent);
+    urgent-foreground:           var(background);
+
+    active-background:           var(active);
+    active-foreground:           var(background);
+
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(background);
+
+    selected-urgent-background:  var(active);
+    selected-urgent-foreground:  var(background);
+
+    selected-active-background:  var(urgent);
+    selected-active-foreground:  var(background);
+}
+
+window {
+    transparency: "real";
+
+    location: center;
+    anchor: center;
+    fullscreen: false;
+
+    width: 700px;
+
+    enabled: true;
+
+    margin: 0px;
+    padding: 0px;
+
+    border: 1px solid;
+    border-radius: 12px;
+    border-color: @selected;
+
+    cursor: "default";
+
+    background-color: @background;
+}
+
+mainbox {
+    enabled: true;
+
+    spacing: 10px;
+
+    margin: 0px;
+    padding: 24px;
+
+    border: 0px;
+
+    background-color: transparent;
+
+    children: [ "inputbar", "message", "listview" ];
+}
+
+inputbar {
+    enabled: true;
+
+    spacing: 10px;
+
+    margin: 0px;
+    padding: 0px;
+
+    border: 0px;
+
+    background-color: transparent;
+    text-color: @foreground;
+
+    children: [ "textbox-prompt-colon", "prompt", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled: true;
+
+    expand: false;
+
+    padding: 8px 10px 8px 10px;
+
+    str: "❓";
+
+    border-radius: 8px;
+
+    background-color: @active;
+    text-color: @background;
+}
+
+prompt {
+    enabled: true;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    background-color: @selected;
+    text-color: @background;
+}
+
+entry {
+    enabled: true;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    background-color: @alternate-background;
+    text-color: @foreground-colour;
+
+    placeholder: "Search Keybinding...";
+    placeholder-color: @foreground;
+
+    cursor: text;
+}
+
+message {
+    enabled: true;
+
+    margin: 0px;
+    padding: 8px 12px;
+
+    border: 0px;
+    border-radius: 8px;
+
+    background-color: @background-alt;
+    text-color: @foreground;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: inherit;
+
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+
+    highlight: none;
+    markup: true;
+}
+
+listview {
+    enabled: true;
+
+    columns: 1;
+    lines: 10;
+
+    cycle: true;
+    dynamic: false;
+
+    scrollbar: true;
+
+    layout: vertical;
+
+    spacing: 0px;
+
+    margin: 0px;
+    padding: 0px;
+
+    border: 0px;
+
+    background-color: transparent;
+    text-color: @foreground;
+
+    fixed-height: true;
+
+    cursor: "default";
+}
+
+element {
+    enabled: true;
+
+    spacing: 10px;
+
+    margin: 0px;
+    padding: 10px 12px;
+
+    border: 0px;
+    border-radius: 10px;
+
+    background-color: transparent;
+    text-color: @foreground;
+
+    cursor: pointer;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element normal.active {
+    background-color: @active;
+    text-color: @background;
+}
+
+element normal.urgent {
+    background-color: @urgent;
+    text-color: @background;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color: @background;
+}
+
+element selected.active {
+    background-color: @active;
+    text-color: @background;
+}
+
+element selected.urgent {
+    background-color: @urgent;
+    text-color: @background;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element alternate.active {
+    background-color: @active;
+    text-color: @background;
+}
+
+element alternate.urgent {
+    background-color: @urgent;
+    text-color: @background;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+
+    vertical-align: 0.5;
+}
+
+scrollbar {
+    handle-width: 5px;
+    handle-color: @selected;
+
+    border-radius: 10px;
+
+    background-color: @background-alt;
+}
+
+

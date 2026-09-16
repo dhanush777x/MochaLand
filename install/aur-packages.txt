@@ -1,0 +1,28 @@
+# MochaLand - AUR Packages
+# Install: yay -S --needed - < aur-packages.txt
+
+catppuccin-qt5ct-git
+papirus-folders-catppuccin-git
+psysonic-bin
+spotiflac-bin
+pixie-sddm-git
+otf-san-francisco
+fzf-tab
+pyprland
+rofi-emoji
+
+# Chaotic-AUR (installed automatically by install.sh):
+#   chaotic-keyring
+#   chaotic-mirrorlist
+catppuccin-cursors-mocha
+colloid-catppuccin-gtk-theme-git
+brave-origin-beta-bin
+heroic-games-launcher-bin
+spicetify-cli
+obsidian
+superproductivity-bin
+bzmenu
+opencode
+localsend
+spotify
+onlyoffice-bin

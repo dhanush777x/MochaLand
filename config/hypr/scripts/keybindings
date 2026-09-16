@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# KeyBindings - Keybinding viewer for Hyprland Lua config
+
+BINDS_FILE="$HOME/.config/hypr/lua/binds.lua"
+ROFI_THEME="$HOME/.config/hypr/rofi/keybindings.rasi"
+
+if [[ ! -f "$BINDS_FILE" ]]; then
+    notify-send "keybindings" "lua/binds.lua not found!"
+    exit 1
+fi
+
+SHORTCUTS=$(awk '
+    /^-- \|\|\|/ { next }
+    /^-- [A-Z]/ { desc=substr($0, 4); gsub(/[^a-zA-Z0-9 +]/, "", desc) }
+    /^hl\.bind\(/ {
+        match($0, /"([^"]+)"/, key)
+        if (key[1] != "") {
+            if (desc == "")
+                desc = "—"
+            printf "<span font=\"monospace\">%-35s</span>  %s\n", key[1], desc
+        }
+    }
+' "$BINDS_FILE")
+
+echo "$SHORTCUTS" | rofi -dmenu -i -p "Shortcuts" -theme "$ROFI_THEME" -config ~/.config/hypr/rofi/keybindings -markup-rows

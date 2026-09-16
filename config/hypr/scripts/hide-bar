@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# HideBar - toggle waybar
+
+case "$1" in
+    -h|--hide)
+        pkill -SIGUSR1 waybar 2>/dev/null
+        ;;
+    -u|--unhide)
+        pkill -SIGUSR2 waybar 2>/dev/null
+        waybar &
+        ;;
+    *)
+        pkill -SIGUSR1 waybar 2>/dev/null
+        ;;
+esac

@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+# wall-select - Wallpaper selector using hyprpaper
+
+MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
+
+wall_dir="$HOME/.config/hypr/wallpapers"
+cacheDir="${XDG_CACHE_HOME:-$HOME/.cache}/hypr-wallpapers"
+thumbScript="$HOME/.config/hypr/scripts/wall-thumbnail"
+
+mkdir -p "$cacheDir"
+
+rofi_command="rofi -dmenu -theme $HOME/.config/hypr/rofi/wall-select.rasi"
+
+PARALLEL_JOBS=$(nproc)
+
+rm -f "${cacheDir}"/.lock_* 2>/dev/null || true
+
+# Generate thumbnails in parallel
+find "$wall_dir" -type f \
+    \( -iname "*.jpg" -o \
+       -iname "*.jpeg" -o \
+       -iname "*.png" -o \
+       -iname "*.webp" \) \
+    -print0 | \
+xargs -0 -P "$PARALLEL_JOBS" -I {} \
+    "$thumbScript" "$cacheDir" "{}"
+
+# Clean stale cache entries
+for cached in "$cacheDir"/*; do
+    [ -f "$cached" ] || continue
+
+    original="${wall_dir}/$(basename "$cached")"
+
+    if [ ! -f "$original" ]; then
+        nombre_archivo=$(basename "$cached")
+
+        rm -f \
+            "$cached" \
+            "${cacheDir}/.${nombre_archivo}.md5" \
+            "${cacheDir}/.lock_${nombre_archivo}"
+    fi
+done
+
+rm -f "${cacheDir}"/.lock_* 2>/dev/null || true
+
+wall_selection=$(
+    find "$wall_dir" -type f \
+        \( -iname "*.jpg" -o \
+           -iname "*.jpeg" -o \
+           -iname "*.png" -o \
+           -iname "*.webp" \) \
+        -print0 |
+    xargs -0 basename -a |
+    LC_ALL=C sort |
+    while IFS= read -r A; do
+        printf '%s\0icon\x1f%s/%s\n' \
+            "$A" \
+            "$cacheDir" \
+            "$A"
+    done | $rofi_command | tr -d '\n'
+)
+
+if [ -n "$wall_selection" ]; then
+
+    WALL_PATH="${wall_dir}/${wall_selection}"
+
+    cat > ~/.config/hypr/hyprpaper.conf <<EOF
+splash = false
+ipc = true
+
+preload = $WALL_PATH
+
+wallpaper {
+    monitor =
+    path = $WALL_PATH
+}
+EOF
+
+    hyprctl hyprpaper preload "$WALL_PATH"
+
+    hyprctl hyprpaper wallpaper ",$WALL_PATH"
+    
+    sleep 0.2
+
+    hyprctl hyprpaper unload unused
+
+    "$HOME/.config/hypr/scripts/wall-sync" &
+fi

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# wall-thumbnail - Generate a 500x500 thumbnail for a wallpaper
+# Usage: wall-thumbnail <cache_dir> <image_path>
+
+set -euo pipefail
+
+cacheDir="$1"
+imagen="$2"
+
+nombre_archivo=$(basename "$imagen")
+cache_file="${cacheDir}/${nombre_archivo}"
+md5_file="${cacheDir}/.${nombre_archivo}.md5"
+lock_file="${cacheDir}/.lock_${nombre_archivo}"
+
+current_md5=$(md5sum "$imagen" | cut -d " " -f1)
+
+(
+    flock -x 9
+
+    if [ ! -f "$cache_file" ] || \
+       [ ! -f "$md5_file" ] || \
+       [ "$current_md5" != "$(cat "$md5_file" 2>/dev/null)" ]; then
+
+        magick "$imagen" \
+            -resize 500x500^ \
+            -gravity center \
+            -extent 500x500 \
+            "$cache_file"
+
+        echo "$current_md5" > "$md5_file"
+    fi
+
+    rm -f "$lock_file"
+
+) 9>"$lock_file"

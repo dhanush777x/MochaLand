@@ -1,0 +1,11 @@
+/**
+ *
+ * dhanush777x - MochaLand
+ * https://github.com/dhanush777x/MochaLand
+ *
+ * Font Configuration
+ **/
+
+* {
+    font: "SF Pro Text Medium 10";
+}

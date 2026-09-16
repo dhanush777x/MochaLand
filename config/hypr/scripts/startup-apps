@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+export LANG="en_US.UTF-8"
+
+# ----------------------------------------------------
+# Brave
+# ----------------------------------------------------
+
+hyprctl dispatch exec "[workspace 1 silent] brave-origin-beta"
+
+# ----------------------------------------------------
+# TMUX SETUP
+# ----------------------------------------------------
+
+if ! tmux has-session -t Kitty 2>/dev/null; then
+    tmux new-session -d -s Kitty -n Term
+    tmux new-window -t Kitty -n nvim
+    tmux send-keys -t Kitty:nvim "lnt && nvim" C-m
+fi
+
+tmux select-window -t Kitty:Term
+
+if ! tmux has-session -t Home 2>/dev/null; then
+    tmux new-session -d -s Home -n Yazi
+    tmux send-keys -t Home:Yazi "yazi" C-m
+fi
+
+# ----------------------------------------------------
+# Kitty
+# ----------------------------------------------------
+
+hyprctl dispatch exec \
+    "[workspace 3 silent] kitty sh -c 'tmux attach-session -t Kitty'"
+
+# ----------------------------------------------------
+# Nautilus
+# ----------------------------------------------------
+
+hyprctl dispatch exec \
+    "[workspace 5 silent] nautilus"
+
+# ----------------------------------------------------
+# Return to workspace 1
+# ----------------------------------------------------
+
+sleep 2
+
+hyprctl dispatch workspace 1
+
+notify-send \
+    "Welcome back" \
+    "All set. You're ready to go."

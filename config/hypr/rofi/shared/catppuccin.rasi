@@ -1,0 +1,16 @@
+/**
+ *
+ * dhanush777x - MochaLand
+ * https://github.com/dhanush777x/MochaLand
+ *
+ * Catppuccin Mocha Color Scheme
+ **/
+
+* {
+    background:     #1E1E2ECC;
+    background-alt: #282839FF;
+    foreground:     #D9E0EEFF;
+    selected:       #B4BEFEFF;
+    active:         #A6E3A1FF;
+    urgent:         #F38BA8FF;
+}

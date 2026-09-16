@@ -1,0 +1,13 @@
+// dhanush777x - MochaLand
+* {
+    font: "JetBrainsMono NF Bold 9";
+    background: #1E1E2ECC;
+    bg-alt: #45475A;
+    background-alt: #1E1E2ECC;
+    foreground: #CDD6F4;
+    selected: #B4BEFE;
+    active: #A6E3A1;
+    urgent: #F38BA8;
+    entry-bg:       #45475ACC;
+    entry-fg:       #CDD6F4;
+}

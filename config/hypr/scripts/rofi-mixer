@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+BASEDIR="$HOME/.config/hypr"
+
+rofi -theme "$BASEDIR/rofi/mixer.rasi" \
+-kb-custom-16 "Ctrl+equal" \
+-kb-custom-17 "Alt+m" \
+-kb-custom-18 "minus,underscore" \
+-kb-custom-19 "equal,plus" \
+-show rofi-sink-mixer \
+-modi "rofi-sink-mixer:$BASEDIR/scripts/rofi-mixer.py --type sink,rofi-source-mixer:$BASEDIR/scripts/rofi-mixer.py --type source" "$@"
+-matching fuzzy \
+-i \
+"$@"

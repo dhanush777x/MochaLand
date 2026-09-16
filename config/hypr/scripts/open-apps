@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+# open-apps - Central dispatcher for Hyprland
+
+SCRIPTS_DIR="$HOME/.config/hypr/scripts"
+ROFI_THEME_DIR="$HOME/.config/hypr/rofi"
+
+case "$1" in
+	--menu)
+		rofi -show drun -theme "$ROFI_THEME_DIR/style-1.rasi"
+		;;
+	--rice)
+		"$SCRIPTS_DIR/rofi-launcher" --choose-style
+		;;
+	--terminal)
+	    kitty	
+		;;
+	--floating)
+		"$SCRIPTS_DIR/term" --floating
+		;;
+	--netmanager)
+		"$SCRIPTS_DIR/net-manager-dm"
+		;;
+    --bluetooth)
+        "$SCRIPTS_DIR/rofi-bluetooth"
+		;;
+	--mixer)
+        "$SCRIPTS_DIR/rofi-mixer"
+        ;;
+	--clipboard)
+		clipcat-menu
+		;;
+	--screenshot)
+		"$SCRIPTS_DIR/screenshot"
+		;;
+	--powermenu)
+		"$SCRIPTS_DIR/power-menu"
+		;;
+	--keybindings)
+		"$SCRIPTS_DIR/keybindings"
+		;;
+	--yazi)
+		"$SCRIPTS_DIR/term" --yazi
+		;;
+	--nvim)
+		"$SCRIPTS_DIR/term" --nvim
+		;;
+	--music)
+		"$SCRIPTS_DIR/term" --music
+		;;
+	--fetch)
+		"$SCRIPTS_DIR/term" --fetch
+		;;
+    --pwm)
+	    power-manager
+        ;;
+	--superproductivity)
+		scratch-super-productivity
+		;;
+		# Apps
+	--filemanager)
+		thunar
+		;;
+	--browser)
+		firefox
+		;;
+	--editor)
+		geany
+		;;
+	--telegram)
+		telegram-desktop
+		;;
+	--whats)
+		firefox -new-tab https://web.whatsapp.com/
+		;;
+	--soundcontrol)
+		pavucontrol
+		;;
+	--emoji)
+		rofi -modi emoji -show emoji -theme "$ROFI_THEME_DIR/clipboard.rasi"
+		;;
+	*)
+		echo "Invalid Option"
+		;;
+esac

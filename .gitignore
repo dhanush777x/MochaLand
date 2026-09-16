@@ -1,0 +1,40 @@
+# Generated / runtime files
+config/gtk-3.0/bookmarks
+
+# Secrets
+config/hypr/.weather-api-key
+
+# hypr state
+config/hypr/rofi/.launcher
+config/hypr/scripts/.term
+
+# mpd runtime databases and sockets
+config/mpd/mpd.db
+config/mpd/mpdstate
+config/mpd/log
+config/mpd/socket
+
+# ncmpcpp
+config/ncmpcpp/error.log
+
+# bspwm (legacy, not managed)
+config/bspwm/
+
+# Cache
+cache/
+*.md5
+.lock_*
+__pycache__/
+*.pyc
+*.pyo
+*.log
+.env
+.vscode/
+.idea/
+node_modules/
+
+# OS / editor artifacts
+.DS_Store
+*.swp
+*.swo
+*~

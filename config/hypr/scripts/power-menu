@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# PowerMenu (ported from bspwm - rofi-based)
+
+ROFI_THEME="$HOME/.config/hypr/rofi/power-menu.rasi"
+
+options="󰍁  Lock
+  Sleep
+󰗽  Logout
+󰜉  Reboot
+󰐥  Poweroff"
+
+rofi_cmd() {
+    rofi -dmenu \
+        -i \
+        -matching fuzzy \
+        -no-tokenize \
+        -p "Goodbye ${USER}" \
+        -mesg "Uptime: $(uptime -p | sed -e 's/up //g')" \
+        -theme "$ROFI_THEME"
+}
+
+chosen=$(printf "%s\n" "$options" | rofi_cmd)
+
+case "$chosen" in
+    *Poweroff) hyprshutdown --vt 7 -p "systemctl poweroff" ;;
+    *Reboot) hyprshutdown --vt 7 -p "systemctl reboot" ;;
+    *Lock) sleep 0.2 && hyprlock ;;
+    *Sleep) systemctl suspend ;;
+    *Logout) hyprshutdown --vt 7 ;;
+esac
+

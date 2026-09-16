@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Bluetooth Status Checker for Waybar (Catppuccin Mocha)
+
+BT_CLASS_PATH="/sys/class/bluetooth"
+[ -d "$BT_CLASS_PATH" ] || exit 0
+
+get_bt_status() {
+    systemctl is-active bluetooth.service >/dev/null 2>&1 || return 1
+    bluetoothctl show | grep -q "Powered: yes" && return 0 || return 2
+}
+
+if get_bt_status; then
+    printf '{"text":"󰂯","class":"on"}\n'
+elif [ $? -eq 2 ]; then
+    printf '{"text":"󰂲","class":"off"}\n'
+fi
+
+exit 0

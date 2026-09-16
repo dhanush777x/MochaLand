@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# term - Terminal launcher (ported from bspwm)
+
+CFG_TERM="$HOME/.config/hypr/scripts/.term"
+
+[ -f "$CFG_TERM" ] || echo "kitty" > "$CFG_TERM"
+
+read -r MY_TERM < "$CFG_TERM"
+
+case $MY_TERM in
+    "kitty")
+	case $1 in
+	    "--terminal") kitty ;;
+	    "--floating") kitty --class=FloaTerm ;;
+	    "--yazi") kitty --hold --name=YaziTerm --class=FloaTerm -e yazi ;;
+	    "--nvim") kitty -e nvim ;;
+	    "--music") kitty --name=MusicTerm --class=FloaTerm -e ncmpcpp ;;
+	    "--fetch") kitty --name=FetchTerm --class=FloaTerm -e ~/.local/bin/sysfetch ;;
+	esac
+	;;
+esac

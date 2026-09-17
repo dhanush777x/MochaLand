@@ -77,6 +77,8 @@ The installer will walk you through everything interactively. Here's what it doe
 > - Your existing configs are backed up to `~/.dotfiles_backup/<timestamp>` - not deleted.
 > - Add your wallpapers to `~/.config/hypr/wallpapers/` after installation.
 
+> **Note:** The install script may not work perfectly for every system. If you run into any issues or something doesn't work as expected, feel free to [open an issue](https://github.com/dhanush777x/MochaLand/issues) or submit a PR. Contributions are always welcome!
+
 ---
 
 ## Stack
@@ -92,7 +94,7 @@ The installer will walk you through everything interactively. Here's what it doe
 | Editor               | Neovim (LazyVim)              |
 | File Manager         | Yazi (TUI) / Nautilus (GUI)   |
 | Lockscreen           | Hyprlock                      |
-| Music                | MPD + ncmpcpp                 |
+| Music                | MPD + ncmpcpp, Spotify                 |
 | Clipboard            | Clipcat                       |
 | Theme                | Catppuccin Mocha              |
 | Icons                | Papirus-Dark                  |

@@ -20,7 +20,7 @@ brave-origin-beta-bin
 heroic-games-launcher-bin
 spicetify-cli
 obsidian
-superproductivity-bin
+superproductivity
 bzmenu
 opencode
 localsend

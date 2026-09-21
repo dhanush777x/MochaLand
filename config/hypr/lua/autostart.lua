@@ -6,7 +6,8 @@ hl.on("hyprland.start", function()
     hl.dispatch(hl.dsp.exec_cmd("hyprctl setcursor Qogir-dark 24"))
 
     -- Environment setup
-    hl.dispatch(hl.dsp.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_CLASS XDG_SESSION_TYPE"))
+    hl.dispatch(hl.dsp.exec_cmd(
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_CLASS XDG_SESSION_TYPE"))
     hl.dispatch(hl.dsp.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland"))
     hl.dispatch(hl.dsp.exec_cmd("systemctl --user restart xdg-desktop-portal"))
 
@@ -22,13 +23,10 @@ hl.on("hyprland.start", function()
     -- Launch apps on specific workspaces
     hl.dispatch(hl.dsp.exec_cmd("brave-origin-beta", { workspace = "1 silent" }))
 
-    -- Tmux session setup
-    hl.dispatch(hl.dsp.exec_cmd("bash -c 'if ! tmux has-session -t Kitty 2>/dev/null; then tmux new-session -d -s Kitty -n Term; tmux new-window -t Kitty -n nvim; tmux send-keys -t Kitty:nvim \"lnt && nvim\" C-m; fi'"))
-    hl.dispatch(hl.dsp.exec_cmd("bash -c 'tmux select-window -t Kitty:Term'"))
-    hl.dispatch(hl.dsp.exec_cmd("bash -c 'if ! tmux has-session -t Home 2>/dev/null; then tmux new-session -d -s Home -n Yazi; tmux send-keys -t Home:Yazi \"yazi\" C-m; fi'"))
-
-    -- Kitty on workspace 3
-    hl.dispatch(hl.dsp.exec_cmd("kitty sh -c 'tmux attach-session -t Kitty'", { workspace = "3 silent" }))
+    -- Kitty with Herdr on workspace 3
+    hl.dispatch(hl.dsp.exec_cmd("kitty -e herdr", {
+        workspace = "3 silent"
+    }))
 
     -- Nautilus on workspace 5
     hl.dispatch(hl.dsp.exec_cmd("nautilus", { workspace = "5 silent" }))

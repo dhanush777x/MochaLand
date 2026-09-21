@@ -22,10 +22,10 @@ rofi_cmd() {
 chosen=$(printf "%s\n" "$options" | rofi_cmd)
 
 case "$chosen" in
-    *Poweroff) hyprshutdown --vt 7 -p "systemctl poweroff" ;;
-    *Reboot) hyprshutdown --vt 7 -p "systemctl reboot" ;;
+    *Poweroff) systemctl poweroff ;;
+    *Reboot) systemctl reboot ;;
     *Lock) sleep 0.2 && hyprlock ;;
     *Sleep) systemctl suspend ;;
-    *Logout) hyprshutdown --vt 7 ;;
+    *Logout) hyprctl dispatch "hl.dsp.exit()" ;;
 esac
 

@@ -11,10 +11,10 @@
     "hyprland/workspaces": {
         "on-scroll-up": "hyprctl dispatch workspace r-1",
         "on-scroll-down": "hyprctl dispatch workspace r+1",
-        "on-click": "notify-send 'workspace clicked'",
         "all-outputs": true,
         "active-only": false,
         "format": "{icon}",
+        "cursor": true,
         "persistent-workspaces": {
             "*": 8
         },
